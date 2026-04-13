@@ -17,28 +17,30 @@
 // ==/UserScript==
 
 (function () {
-    'use strict';
-    const opacity = GM_getValue('gbf_opacity')
-    if (!opacity) {
-        GM_setValue('gbf_opacity', 0.5)
-    } else {
-        GM_addStyle(
-            `
+  "use strict";
+  const opacity = GM_getValue("gbf_opacity");
+  if (!opacity) {
+    GM_setValue("gbf_opacity", 0.5);
+  } else {
+    GM_addStyle(
+      `
            body, #ready { opacity: ${opacity};}
-        `)
-    }
-    const setOpacity = (num) => {
-        return () => {
-            GM_setValue('gbf_opacity', num)
-        }
-    }
-    GM_registerMenuCommand('OPACITY_0.5', setOpacity(0.5));
-    GM_registerMenuCommand('OPACITY_1', setOpacity(1));
+        `,
+    );
+  }
+  const setOpacity = (num) => {
+    return () => {
+      GM_setValue("gbf_opacity", num);
+    };
+  };
+  GM_registerMenuCommand("OPACITY_0.5", setOpacity(0.5));
+  GM_registerMenuCommand("OPACITY_1", setOpacity(1));
 
-    GM_addValueChangeListener('gbf_opacity', (name, ov, nv) => {
-        GM_addStyle(
-            `
+  GM_addValueChangeListener("gbf_opacity", (name, ov, nv) => {
+    GM_addStyle(
+      `
            body, #ready { opacity: ${nv};}
-        `)
-    })
+        `,
+    );
+  });
 })();
